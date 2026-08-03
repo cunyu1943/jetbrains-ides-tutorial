@@ -7,7 +7,7 @@ import { RSSOptions, RssPlugin } from 'vitepress-plugin-rss'
 import { GitChangelog, GitChangelogMarkdownSection, } from '@nolebase/vitepress-plugin-git-changelog/vite'
 import { SponsorPlugin } from 'vitepress-plugin-sponsor'
 
-const baseRepo = '//'
+const baseRepo = '/jetbrains-ides-tutorial/'
 const baseUrl = 'https://cunyu1943.github.io'
 const RSS: RSSOptions = {
   title: '村雨遥',
@@ -98,9 +98,9 @@ export default defineConfig({
   },
 
   // 站点名
-  title: "村雨遥",
+  title: "村雨遥的 JetBrains IDEs 中文教程",
   // 站点描述
-  description: "A VitePress Site",
+  description: "JetBrains IDEs 中文教程",
   // 纯净链接
   cleanUrls: true,
   // 预演
@@ -156,7 +156,7 @@ export default defineConfig({
     returnToTopLabel: '返回顶部',
     // 大纲
     outline: {
-      level: [2, 3], // 显示2-4级标题
+      level: [2, 4],  // 显示2-4级标题
       // level: 'deep', // 显示2-6级标题
       label: '大纲' // 文字显示
     },

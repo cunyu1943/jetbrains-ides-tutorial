@@ -1,154 +1,104 @@
-# VitePress 个人站点模板
+# JetBrains IDEs 中文教程
 
-基于 [VitePress](https://vitepress.dev/) 构建的个人站点模板，集成了丰富的社区插件与自定义主题样式，开箱即用。
+> 一个专注于 JetBrains 旗下各 IDE 中文教程的开源项目，致力于为开发者提供系统、实用的使用指南。
 
-## 功能特性
+## 一、项目简介
 
-- **全文搜索** — 基于 [pagefind](https://pagefind.app/) 的离线全文搜索
-- **RSS 订阅** — 通过 `vitepress-plugin-rss` 自动生成 RSS
-- **Git 变更日志** — 基于 `@nolebase/vitepress-plugin-git-changelog` 自动记录页面修改历史
-- **公告弹窗** — 自定义公告组件，支持文本、图片、按钮，5 秒自动关闭
-- **打赏功能** — 集成 `vitepress-plugin-sponsor`，支持支付宝/微信二维码
-- **站点统计** — 基于 [不蒜子](https://busuanzi.pure.js.org/) 的访问量与访客数统计
-- **文章元信息** — 自动显示更新日期、字数统计、预估阅读时长
-- **代码组图标** — `vitepress-plugin-group-icons` 为代码块添加语言图标
-- **自定义样式** — 引用块、代码块、侧边栏图标、模糊隐藏、标记高亮等多套自定义样式
-- **霞鹜文楷字体** — 全站使用 LXGW WenKai GB Screen R 字体
-- **Hero 下划线动画** — 首页标题带 SVG 下划线装饰
-- **暗色主题** — 默认启用深色模式
-- **GitHub Pages 自动部署** — 配置了 GitHub Actions 工作流，推送到 `main` 分支自动构建部署
+本项目是一个面向中文用户的 JetBrains IDEs 学习仓库，内容由 [村雨遥](https://github.com/cunyu1943) 整理并维护。项目以 VitePress 作为文档站点框架，提供清晰的目录结构、本地搜索、RSS 订阅、代码变更日志等功能，方便读者随时查阅与学习。
 
-## 项目结构
+目前项目已涵盖 **IntelliJ IDEA** 教程，后续将持续扩展至 JetBrains 旗下其他 IDE，例如 PyCharm、WebStorm、GoLand、Rider 等。
+
+## 二、目录结构
 
 ```
-.
+jetbrains-ides-tutorial/
 ├── .github/
 │   └── workflows/
-│       └── auto-deploy.yml       # GitHub Actions 自动部署
+│       └── auto-deploy.yml       # 自动部署工作流
 ├── docs/
 │   ├── .vitepress/
-│   │   ├── configs/
-│   │   │   ├── nav.ts            # 导航栏配置
-│   │   │   └── sidebar.ts        # 侧边栏配置
-│   │   ├── theme/
-│   │   │   ├── components/
-│   │   │   │   ├── ArticleMetadata.vue  # 文章元信息（字数/阅读时长）
-│   │   │   │   ├── DataPanel.vue        # 站点访问量统计面板
-│   │   │   │   ├── HomeUnderline.vue    # 首页标题下划线装饰
-│   │   │   │   └── notice.vue           # 公告弹窗组件
-│   │   │   ├── style/
-│   │   │   │   ├── var.css              # CSS 变量与字体
-│   │   │   │   ├── index.css            # 样式入口
-│   │   │   │   ├── blockquote.css       # 引用块样式
-│   │   │   │   ├── blur.css             # 模糊隐藏样式
-│   │   │   │   ├── hidden.css           # 隐藏样式
-│   │   │   │   ├── marker.css           # 标记高亮样式
-│   │   │   │   ├── sidebarIcon.css      # 侧边栏图标样式
-│   │   │   │   ├── vp-code.css          # 代码块样式
-│   │   │   │   ├── vp-code-group.css    # 代码组样式
-│   │   │   │   └── vp-code-title.css    # 代码标题样式
-│   │   │   ├── untils/
-│   │   │   │   └── functions.ts         # 工具函数（字数统计）
-│   │   │   └── index.ts                 # 主题入口
-│   │   └── config.mts                   # VitePress 站点配置
+│   │   ├── configs/              # 导航栏与侧边栏配置
+│   │   ├── theme/                # 主题组件与样式
+│   │   └── config.mts            # VitePress 站点配置
+│   ├── public/                   # 静态资源
 │   └── src/
-│       ├── public/
-│       │   ├── imgs/                    # 图片资源
-│       │   └── svg/                     # SVG 图标
-│       ├── index.md                     # 首页
-│       ├── api-examples.md             # API 示例页
-│       └── markdown-examples.md        # Markdown 扩展示例页
+│       └── intellij-idea/        # IntelliJ IDEA 教程
+├── LICENSE
 ├── package.json
 ├── pnpm-lock.yaml
-└── LICENSE                             # CC BY 4.0
+└── README.md
 ```
 
-## 快速开始
+## 三、内容大纲
 
-### 环境要求
+当前已收录的教程如下：
 
-- Node.js >= 20
-- pnpm（推荐）
+### 3.1 IntelliJ IDEA 教程
 
-### 安装依赖
+1. [创建 Java 入门应用](docs/src/intellij-idea/20210914-java-app.md)：从零开始使用 IDEA 创建、运行并打包第一个 `Hello World!` Java 程序。
+2. [实用小技巧](docs/src/intellij-idea/20211010-tips.md)：汇总 IDEA 日常开发中的高频实用技巧，提升编码效率。
+3. [集成并使用 Git 图文教程](docs/src/intellij-idea/20220105-git.md)：图文并茂地讲解如何在 IDEA 中集成并使用 Git 进行版本控制。
+4. [最新版 IntelliJ IDEA 使用手册](docs/src/intellij-idea/20220202-idea-guide.md)：涵盖 IDEA 的下载、安装、配置及常用设置，适合新手入门。
+5. [原来大厂都是这么提交代码的](docs/src/intellij-idea/20230525-code-commit.md)：介绍大厂规范化的代码提交流程与最佳实践。
+
+## 四、技术栈
+
+- **文档框架**：[VitePress](https://vitepress.dev/)
+- **包管理工具**：[pnpm](https://pnpm.io/)
+- **增强插件**：
+  - `@nolebase/vitepress-plugin-git-changelog`：基于 Git 的变更日志
+  - `vitepress-plugin-group-icons`：代码组图标
+  - `vitepress-plugin-rss`：RSS 订阅
+  - `vitepress-plugin-announcement`：站点公告
+  - `vitepress-plugin-sponsor`：打赏模块
+
+## 五、本地运行
+
+本项目推荐使用 `pnpm` 作为包管理工具，使用前请先安装 [Node.js](https://nodejs.org/) 环境。
 
 ```bash
+# 安装依赖
 pnpm install
-```
 
-### 本地开发
-
-```bash
+# 启动本地开发服务器
 pnpm docs:dev
-```
 
-### 构建生产
-
-```bash
+# 构建生产版本
 pnpm docs:build
-```
 
-### 预览构建结果
-
-```bash
+# 本地预览构建产物
 pnpm docs:preview
 ```
 
-## 自定义配置
+启动成功后，在浏览器访问终端输出的本地地址（默认为 `http://localhost:5173`）即可查看站点。
 
-### 站点信息
+## 六、在线访问
 
-编辑 [docs/.vitepress/config.mts](docs/.vitepress/config.mts) 修改站点标题、描述、语言等基础配置：
+项目通过 GitHub Actions 自动部署至 GitHub Pages，部署完成后可通过以下地址访问：
 
-```ts
-export default defineConfig({
-  title: "你的站点名",
-  description: "你的站点描述",
-  lang: 'zh-CN',
-  // ...
-})
-```
+- 在线站点：<https://cunyu1943.github.io/jetbrains-ides-tutorial/>
 
-### 导航栏与侧边栏
+## 七、参与贡献
 
-- 导航栏：编辑 [docs/.vitepress/configs/nav.ts](docs/.vitepress/configs/nav.ts)
-- 侧边栏：编辑 [docs/.vitepress/configs/sidebar.ts](docs/.vitepress/configs/sidebar.ts)
+欢迎大家一起完善本教程！你可以通过以下方式参与贡献：
 
-### 公告弹窗
+1. Fork 本仓库并克隆到本地。
+2. 新建分支进行内容编写或修改：`git checkout -b feat/your-topic`。
+3. 提交更改并推送到你的远程仓库。
+4. 提交 Pull Request，描述你的修改内容与目的。
 
-编辑 [docs/.vitepress/theme/components/notice.vue](docs/.vitepress/theme/components/notice.vue) 修改公告内容，或在 [config.mts](docs/.vitepress/config.mts) 中通过 `AnnouncementPlugin` 配置。
+贡献时请注意：
 
-### 打赏二维码
+- 保持文档结构与现有风格一致。
+- 图片资源请放置在对应文章的 `assets` 目录下。
+- 中英文之间保留空格，引号使用中文引号「」。
 
-替换以下图片文件：
+## 八、联系作者
 
-- `docs/src/public/imgs/award/alipay.jpg` — 支付宝收款码
-- `docs/src/public/imgs/award/wechatpay.jpg` — 微信收款码
+- GitHub：<https://github.com/cunyu1943>
+- 个人主页：<https://cunyu1943.github.io>
+- 语雀（数字花园）：<https://yuque.com/cunyu1943>
 
-### 主题色与字体
+## 九、许可证
 
-编辑 [docs/.vitepress/theme/style/var.css](docs/.vitepress/theme/style/var.css) 修改 CSS 变量，包括品牌色、Hero 渐变色、字体等。
-
-## 部署
-
-项目已配置 GitHub Actions 自动部署工作流（[.github/workflows/auto-deploy.yml](.github/workflows/auto-deploy.yml)），推送到 `main` 分支即可自动构建并部署到 GitHub Pages。
-
-如需手动部署，请参考 [VitePress 部署文档](https://vitepress.dev/guide/deploy)。
-
-## 技术栈
-
-| 技术 | 说明 |
-|------|------|
-| [VitePress](https://vitepress.dev/) | 静态站点生成器 |
-| [Vue 3](https://vuejs.org/) | 前端框架 |
-| [pagefind](https://pagefind.app/) | 离线全文搜索 |
-| [不蒜子](https://busuanzi.pure.js.org/) | 站点访问统计 |
-| [LXGW WenKai](https://github.com/lxgw/LxgwWenKai) | 霞鹜文楷字体 |
-
-## Star 趋势
-
-[![Star History Chart](https://api.star-history.com/svg?repos=cunyu1943/vitpress&type=Date)](https://star-history.com/#cunyu1943/vitpress&Date)
-
-## 许可证
-
-[Creative Commons Attribution 4.0 International (CC BY 4.0)](LICENSE)
+本项目基于 [Creative Commons Attribution 4.0 International (CC BY 4.0)](LICENSE) 协议开源，转载请注明作者并附上原文链接。

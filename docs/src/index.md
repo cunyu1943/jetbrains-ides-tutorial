@@ -4,8 +4,8 @@ layout: home
 
 hero:
   name: "村雨遥"
-  text: "A VitePress Site"
-  tagline: My great project tagline
+  text: "JetBrains IDEs 中文教程"
+  tagline: 专注于 JetBrains 旗下各 IDE 中文教程的开源项目，致力于为开发者提供系统、实用的使用指南。
   image:
     src: imgs/site/logo.png
   actions:
