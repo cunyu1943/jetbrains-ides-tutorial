@@ -14,6 +14,7 @@ export const sidebar: DefaultTheme.Config['sidebar'] = {
                 { text: '集成并使用 Git 图文教程', link: '/intellij-idea/20220105-git' },
                 { text: '最新版 IntelliJ IDEA 使用手册', link: '/intellij-idea/20220202-idea-guide' },
                 { text: '原来大厂都是这么提交代码的', link: '/intellij-idea/20230525-code-commit' },
+                { text: 'Command line is too long 解决方法', link: '/intellij-idea/20260706-command-line-is-too-long' },
             ]
         },
 

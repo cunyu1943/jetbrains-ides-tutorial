@@ -9,3 +9,4 @@
 3. [集成并使用 Git 图文教程](20220105-git)
 4. [最新版 IntelliJ IDEA 使用手册](20220202-idea-guide)
 5. [原来大厂都是这么提交代码的](20230525-code-commit)
+6. [Command line is too long 解决方法](20260706-command-line-is-too-long)
