@@ -1,80 +1,66 @@
-# 构建 VitePress 站点并将其部署到 GitHub Pages
+# 构建 VitePress 站点并将其部署到 GitHub Pages 的示例工作流程
+#
 name: 🎈 Deploy VitePress site to Pages
 
 on:
+  # 在针对 `main` 分支的推送上运行。如果你
+  # 使用 `master` 分支作为默认分支，请将其更改为 `master`
   push:
-    branches: [main]   # 默认分支为 main，若为 master 请修改
-  workflow_dispatch:   # 支持手动触发
+    branches: [main]
 
-# 设置 Pages 部署所需的最小权限
+  # 允许你从 Actions 选项卡手动运行此工作流程
+  workflow_dispatch:
+
+# 设置 GITHUB_TOKEN 的权限，以允许部署到 GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# 并发控制：仅允许一个 Pages 部署任务运行，防止冲突
+# 只允许同时进行一次部署，跳过正在运行和最新队列之间的运行队列
+# 但是，不要取消正在进行的运行，因为我们希望允许这些生产部署完成
 concurrency:
   group: pages
   cancel-in-progress: false
 
 jobs:
-  # -------- 构建阶段 --------
+  # 构建工作
   build:
-    # 🔥 改动 1：显式锁定 Runner 版本，避免 "hosted runner 未获取" 错误
-    runs-on: ubuntu-24.04
-    
-    # 🔥 改动 2：增加超时防御，避免卡死在排队阶段浪费配额
-    timeout-minutes: 30
-
+    runs-on: ubuntu-latest
     steps:
       - name: 🎆 Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # 保留 Git 历史，用于 VitePress 的 lastUpdated 时间戳
-
-      # 🔥 改动 3：使用 pnpm 官方最新 action，不写死版本号（读取 packageManager 字段）
-      - name: 🛠 Setup pnpm
-        uses: pnpm/action-setup@v4
-        # 无需指定 version，自动读取 package.json 中的 "packageManager": "pnpm@9.x.x"
-
-      - name: 🛠 Setup Node.js
+          fetch-depth: 0 # 如果未启用 lastUpdated，则不需要
+      - uses: pnpm/action-setup@v3 # 如果使用 pnpm，请取消注释
+        with:
+          version: 8
+      # - uses: oven-sh/setup-bun@v1 # 如果使用 Bun，请取消注释
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          # 🔥 改动 4：切换至 Node 20 LTS（稳定性首选）
-          node-version: 20
-          # 开启 pnpm 缓存，并显式指定 lock 文件路径，提高命中率
-          cache: pnpm
-          # cache-dependency-path: pnpm-lock.yaml
-
-      # 🔥 改动 5：升级 configure-pages 至 v5
-      - name: 🔧 Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: 📦 Install dependencies
-        run: pnpm install --frozen-lockfile  # 生产环境必须使用锁文件
-
-      - name: 🏗️ Build with VitePress
-        run: pnpm docs:build
-        env:
-          NODE_OPTIONS: --max-old-space-size=4096  # 若站点较大，增加内存限制
-
-      # 🔥 改动 6：upload artifact 使用官方推荐写法
-      - name: 📤 Upload artifact
+          node-version: latest
+          cache: pnpm # 或 npm / yarn
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      - name: Install dependencies
+        run: pnpm install # 或 npm ci / yarn install / bun install
+      - name: Build with VitePress
+        run: pnpm docs:build # npm run docs:build  / yarn docs:build / bun run docs:build
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # 确保路径与你的 VitePress 配置（srcDir）一致
           path: docs/.vitepress/dist
 
-  # -------- 部署阶段 --------
+  # 部署工作
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     needs: build
-    runs-on: ubuntu-24.04  # 同样锁定版本
+    runs-on: ubuntu-latest
     name: Deploy
     steps:
-      # 🔥 改动 7：deploy-pages 保持 v4（最新），没问题
       - name: 🎉 Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
